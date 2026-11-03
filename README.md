@@ -9,6 +9,7 @@ An interactive timeline from creation to AD 100. It places the people and events
 - **Era shortcuts** from Creation to Abraham through to Jesus and the apostles
 - **Search** for any person or event
 - **14 cards** on places where the Bible meets other ancient records
+- **Full screen** (button or the F key) and a **light / dark / auto** colour switch
 - **Works on phones:** swipe to travel, pinch to zoom, tap for details
 
 ## How to open it
