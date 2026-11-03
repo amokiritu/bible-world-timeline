@@ -200,12 +200,16 @@ body.is-full{overflow:hidden}
 #app.full .stage{flex:1;min-height:0;grid-template-rows:minmax(0,1fr)}
 #app.full #tl,#app.full #detail{height:auto;min-height:0}
 #app.full #detail{position:static}
-#app.full.nosel .stage{grid-template-columns:minmax(0,1fr)}
-#app.full.nosel #detail{display:none}
+/* the details panel only appears once something is selected */
+#app.nosel .stage{grid-template-columns:minmax(0,1fr)}
+#app.nosel #detail{display:none}
 @media (max-width:1179px){ #app.full #detail{display:none} }
 
 /* ---- detail panel ---- */
-.detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:24px}
+.detail{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:24px}
+.d-x{position:absolute;top:10px;right:10px;border:0;background:var(--sunk);border-radius:6px;width:36px;height:32px;font-size:20px;line-height:1;cursor:pointer;color:var(--fg)}
+.d-x:hover{color:var(--accent)}
+.d-main{padding-right:30px}
 .d-lane{display:flex;align-items:center;gap:8px;margin:0 0 6px;font:700 12px/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .d-lane .sw{width:10px;height:10px;border-radius:2px;background:var(--c)}
 .detail h2{font:600 clamp(24px,3vw,32px)/1.15 var(--f-display);margin:0 0 6px;text-wrap:balance}
@@ -905,7 +909,11 @@ function updateSel(){
   }
   const was=app.classList.contains('nosel');
   app.classList.toggle('nosel',!sel);
-  if(isFull&&was!==!sel) requestAnimationFrame(()=>{mini();laneVis();stickLabels()});
+  // the panel opening or closing changes the timeline's width: keep the selected entry in view
+  if(was!==!sel) requestAnimationFrame(()=>{
+    if(sel){const el=track.querySelector(`.it[data-id="${sel.id}"]`);if(el){const r=el.getBoundingClientRect(),b=sc.getBoundingClientRect();if(r.left<b.left||r.left>b.right-60)scrollToItem(sel)}}
+    mini();laneVis();stickLabels();
+  });
   detail(); mini(); sheet(); syncHash();
 }
 
@@ -959,6 +967,7 @@ function focusItem(d,storyIdx,noPageScroll){
   const pad=Math.max(60,(hi-lo)*0.25);
   active=null; renderJumps();
   sel=d; story=storyIdx??null; sheetOn=true;
+  app.classList.remove('nosel'); // open the panel first so the zoom fits the narrower timeline
   $('#msg').textContent=`${d.name}, ${fr(d)}`;
   if(hidden.delete(d.lane)) renderToggles();
   fitRange(lo-pad,hi+pad);
@@ -1027,7 +1036,7 @@ function detail(){
   const extra=[];
   if(d.g) extra.push(`Year of the world ${d.s+4174}${d.pt?'':'–'+(d.e+4174)}`);
   if(d.alt) extra.push(`Range of proposed dates: ${fr({s:d.alt[0],e:d.alt[1],pt:false,c:d.c})}`);
-  box.innerHTML=`<div class="d-main">
+  box.innerHTML=`<button class="d-x" id="d-x" aria-label="Close details" title="Close (Esc)">×</button><div class="d-main">
     ${storyBox('story')}
     <p class="d-lane" style="--c:var(--c-${L.id})"><span class="sw"></span>${esc(L.name)}</p>
     <h2>${esc(d.name)}</h2>
@@ -1040,7 +1049,7 @@ function detail(){
   <div class="d-over"><h3>At the same time <span>${others.length} entries</span></h3><div class="over-list">${groups||'<p class="empty">Nothing else on the timeline overlaps this.</p>'}</div></div>`;
 }
 $('#detail-body').addEventListener('click',e=>{
-  if(e.target.closest('#clear')){select(null);return}
+  if(e.target.closest('#clear,#d-x')){select(null);return}
   const sh=e.target.closest('#d-share'); if(sh){share(sh);return}
   const st=e.target.closest('[data-st]'); if(st){openStory(+st.dataset.st);return}
   const c=e.target.closest('.chip'); if(c) select(byId.get(c.dataset.id),true);
@@ -1234,6 +1243,7 @@ document.addEventListener('keydown',e=>{
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   if(e.key==='f'||e.key==='F'){e.preventDefault();setFull(!isFull)}
   else if(e.key==='Escape'&&isFull) setFull(false);
+  else if(e.key==='Escape'&&sel) select(null);
   else if(story!==null&&sel&&['PageDown','PageUp','ArrowRight','ArrowLeft'].includes(e.key)){
     e.preventDefault();
     const n=story+(e.key==='PageDown'||e.key==='ArrowRight'?1:-1);
