@@ -291,7 +291,7 @@ footer p{color:var(--muted);font-size:14.5px;max-width:78ch;margin:0 0 8px}
   <h2>About the dates</h2>
   <p>Dates follow a traditional chronology that takes the Bible’s own numbers at face value: an Exodus around 1446 BC (1 Kings 6:1) and the widely used reign dates worked out by Edwin Thiele for the kings. Many historians place the Exodus near 1260 BC and the patriarchs later. Reign dates can differ by a year or two because of shared reigns between fathers and sons and different calendars.</p>
   <p>Genesis 1–11 is placed by adding up the ages in Genesis 5 and 11 (the Hebrew text) and counting back from Abraham. That puts creation at about 4174 BC and the Flood at about 2518 BC. Archbishop Ussher’s well-known 4004 BC uses the same method with a later date for Abraham, while the Greek Septuagint’s numbers add roughly 1,400 years. Many Bible scholars read these genealogies as selective rather than complete, and geology and astronomy date the earth and universe far older. This section therefore shows the Bible’s own reckoning, not dates historians agree on. On these numbers the Flood falls within Egypt’s Old Kingdom, whose records show no break.</p>
-  <p>Dates for Egypt and Mesopotamia follow the standard chronology. Anything before about 900 BC is approximate, and judges are shown by their time in office.</p>
+  <p>Dates for Egypt and Mesopotamia follow the standard chronology. On those dates the 1446 BC Exodus falls under Thutmose III; those who hold the early Exodus usually place Egypt’s kings a few decades earlier, making Amenhotep II the pharaoh of the Exodus. Anything before about 900 BC is approximate, and judges are shown by their time in office.</p>
 </footer>
 
 <script>
@@ -496,7 +496,7 @@ function add(lane,name,s,e,note,ref,f){DATA.push({lane,name,s,e,note,ref:ref||''
  ["Sargon of Akkad",-2334,-2279,"The first known empire-builder.",""],
  ["Hammurabi",-1792,-1750,"Babylonian king famous for his law code.",""],
  ["Thutmose III",-1479,-1425,"Egypt’s great conqueror. Under the 1446 BC dating, the pharaoh of the oppression.","Exodus 1–2"],
- ["Amenhotep II",-1427,-1401,"Proposed pharaoh of the Exodus under the 1446 BC dating.","Exodus 5–14"],
+ ["Amenhotep II",-1427,-1401,"Proposed pharaoh of the Exodus under the 1446 BC dating. Those who hold that date usually start his reign earlier, about 1453 BC, than the standard 1427 BC shown here.","Exodus 5–14"],
  ["Akhenaten",-1353,-1336,"Worshipped a single sun-god. Letters to his court report raiders called Habiru in Canaan.",""],
  ["Tutankhamun",-1332,-1323,"Boy-king whose untouched tomb was found in 1922.",""],
  ["Ramesses II",-1279,-1213,"Proposed pharaoh of the Exodus under the later dating; built the city of Pi-Ramesses.","Exodus 1:11"],
@@ -570,9 +570,9 @@ DATA.forEach(d=>{d.id=slug(d.name);d.pt=d.s===d.e;byId.set(d.id,d)});
 const STORIES=[
  ['adam','c. 3300 BC','Adam lived to see Noah’s father','On the Bible’s own numbers, Adam was still alive when Lamech, Noah’s father, was born. Nine generations were alive at once.'],
  ['shem','2166–2016 BC','Noah’s son in Abraham’s day','Shem lived until Abraham was 150, and Eber, ancestor of the Hebrews, outlived Abraham himself.'],
- ['ur-iii-sumer','c. 2100 BC','Abraham and the cities of Sumer','Abraham grows up as Ur flourishes under its last Sumerian dynasty, when the city’s great ziggurat was built.'],
+ ['ur-iii-sumer','c. 2100 BC','Abraham and the cities of Sumer','In Abraham’s day Ur flourishes under its last Sumerian dynasty, when the city’s great ziggurat was built.'],
  ['joseph','c. 1900 BC','Joseph in Middle Kingdom Egypt','On this dating, Joseph manages Egypt’s grain during the Middle Kingdom, an era of strong central government and large irrigation works.'],
- ['the-exodus','1446 or c. 1260 BC','Which pharaoh?','The Bible’s numbers point to 1446 BC and Amenhotep II; many historians prefer Ramesses II. Merneptah’s stone shows Israel was in Canaan by about 1208 BC.'],
+ ['the-exodus','1446 or c. 1260 BC','Which pharaoh?','The Bible’s numbers point to 1446 BC and, on a slightly earlier dating of Egypt’s kings, Amenhotep II; many historians prefer Ramesses II. Merneptah’s stone shows Israel was in Canaan by about 1208 BC.'],
  ['shishak-shoshenq-i','925 BC','Shishak raids Judah','Egypt’s Shoshenq I attacks in Rehoboam’s fifth year and carves the towns he took on a temple wall at Karnak.'],
  ['ahab','853–841 BC','Israel’s kings in Assyrian records','Shalmaneser III records Ahab’s chariots at the battle of Qarqar, and shows Jehu bowing before him on the Black Obelisk.'],
  ['siege-of-jerusalem','701 BC','Hezekiah, Isaiah and Sennacherib','Assyria besieges Jerusalem while Isaiah counsels the king and the Kushite prince Tirhakah marches north. Both sides recorded it.'],
@@ -843,6 +843,7 @@ function find(){
   const d=DATA.find(d=>d.name.toLowerCase()===q)||DATA.find(d=>d.name.toLowerCase().startsWith(q))||DATA.find(d=>d.name.toLowerCase().includes(q)||d.note.toLowerCase().includes(q));
   if(!d){msg.textContent=`No match for “${$('#q').value.trim()}”`;return}
   msg.textContent='';
+  sheetOn=true;
   if(ppy<LBL_PPY){ppy=3;render()}
   select(d,true);
 }
@@ -876,7 +877,11 @@ function sheet(){
 }
 $('#sheet').addEventListener('click',e=>{
   if(e.target.closest('#s-x')){sheetOn=false;sheet()}
-  if(e.target.closest('#s-go')) $('#detail').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
+  if(e.target.closest('#s-go')){
+    // in full screen on smaller screens the details panel is hidden, so leave full screen first
+    if(isFull&&!SIDE.matches){setFull(false);requestAnimationFrame(()=>$('#detail').scrollIntoView({behavior:'auto',block:'start'}))}
+    else $('#detail').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
+  }
 });
 if('IntersectionObserver' in window){
   new IntersectionObserver(es=>{detailVisible=es[0].isIntersecting;sheet()},{threshold:0.15}).observe($('#detail-body'));
