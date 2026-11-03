@@ -15,12 +15,16 @@ The owner is a church elder and finance professional, not a developer. Explain c
 - `<style>` at the top: colour tokens on `:root`, with dark values under `prefers-color-scheme: dark` (guarded by `:root:not([data-theme="light"])`) and again under `:root[data-theme="dark"]`. Any new colour must be a token defined in all three places.
 - `START`, `END`: the year span (negative numbers are BC, with no year 0).
 - `LANES`: the eight tracks. `ERAS`: the shaded era bands. `JUMPS`: the "Jump to" buttons.
-- **Data**: one block per track, each a list of rows passed to `add(lane, name, start, end, note, reference, flags)`.
+- **Data**: one block per track, each a list of rows passed to `add(lane, name, start, end, note, reference, flags, range)`.
   - `start === end` draws a diamond (single event); otherwise a bar.
   - Flags: `m` = major (bold, always labelled), `c` = approximate, shown with "c." before the date (anything before 900 BC gets "c." automatically), `g` = Genesis 1–11 genealogy date (dashed outline, shows "year of the world").
-  - An entry's id is its name turned into a slug, so names must stay unique. `STORIES` cards point at these ids.
-- `STORIES`: the "Where the Bible meets world history" cards: `[id, date label, title, text]`.
-- Script sections are marked `// ---------- name ----------`: helpers, state and rendering, overview strip, detail panel, controls, phone bottom card, pinch zoom, full screen, light/dark, start.
+  - `range` (optional) is `[earliest, latest]` for dates scholars dispute; it draws a thin line under the entry and shows in the details. Mention the alternative in the note too.
+  - An entry's id is its name turned into a slug, so names must stay unique. `STORIES` cards and shared links (`#hezekiah`) point at these ids, so renaming an entry breaks old links.
+- **Track colours**: Bible events, Empires and World rulers were chosen to stay distinct for colour-blind readers. Check any colour change with a colour-blindness simulator.
+- `STORIES`: the "Where the Bible meets world history" cards: `[id, date label, title, text]`, kept in date order (the Next story button follows this order).
+- Script sections are marked `// ---------- name ----------`: helpers, state and rendering, overview strip, detail panel, share a link, stories, controls (including the View menu), search, phone bottom card, pinch zoom, full screen, light/dark, text size, printing, start.
+- Entry sizes for normal, phone, large text and print are set in two places that must match: `metrics()` in the script and the `--ih`/`--ifs`/`--dm` values on `#track` in the CSS.
+- Printing redraws the years on screen to fit one landscape page and leaves out anything past the right edge, otherwise the browser shrinks the whole page.
 
 ## Dating conventions (keep consistent)
 
@@ -39,6 +43,8 @@ Check the page in a browser:
 2. Light and dark (use the Auto / Light / Dark switch).
 3. Full screen (button or F key), then Esc to leave.
 4. Select an entry and check the "at the same time" list.
-5. No errors in the browser console.
+5. Phone turned sideways (about 844 × 390): the timeline should fill most of the screen.
+6. Large text and print preview (View menu), if the layout of entries changed.
+7. No errors in the browser console.
 
 Write commit messages in plain English that say what changed for the reader.

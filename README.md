@@ -5,12 +5,15 @@ An interactive timeline from creation to AD 100. It places the people and events
 ## What's in it
 
 - **210 entries on eight tracks:** people of the Bible, kings of Judah, kings of Israel, prophets, Bible events, empires and nations, world rulers, and the wider world
-- **Tap any entry** to read about it, with Bible references, and see everyone alive or in power at the same time
+- **Tap any name** to read about it, with Bible references, and see everyone alive or in power at the same time
 - **Era shortcuts** from Creation to Abraham through to Jesus and the apostles
-- **Search** for any person or event
-- **16 cards** on places where the Bible meets other ancient records
-- **Full screen** (button or the F key) and a **light / dark / auto** colour switch
-- **Works on phones:** swipe to travel, pinch to zoom, tap for details
+- **Search** that lists every match as you type
+- **16 story cards** on places where the Bible meets other ancient records, in date order, with **Next story** buttons (or the arrow keys) to step through them, for example on a projector in full screen
+- **Share a link** to any entry: the address opens the timeline at that person or event
+- **Disputed dates** shown as a thin line under the entry (the Exodus, Jesus' birth and death, Pentecost)
+- **View menu:** show or hide tracks, light / dark / auto colours, large text for projecting, and **print** the period on screen on a landscape page
+- **Full screen** (button or the F key)
+- **Works on phones:** swipe to travel, pinch or use + and − to zoom, tap a name for details
 
 ## How to open it
 
