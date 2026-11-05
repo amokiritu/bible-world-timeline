@@ -907,10 +907,15 @@ function updateSel(){
     if(sel){band.hidden=false;band.style.left=X(sel.s)+'px';band.style.width=Math.max(2,(printing?Math.min(PRINT_W,X(sel.e)):X(sel.e))-X(sel.s))+'px'}
     else band.hidden=true;
   }
-  const was=app.classList.contains('nosel');
+  const was=app.classList.contains('nosel'), yrs=viewYears();
   app.classList.toggle('nosel',!sel);
-  // the panel opening or closing changes the timeline's width: keep the selected entry in view
+  // the panel opening or closing changes the timeline's width: keep the same years in view
+  // (or the chosen "Jump to" period), and keep the selected entry visible
   if(was!==!sel) requestAnimationFrame(()=>{
+    if(SIDE.matches&&!printing){
+      if(active!==null) fitRange(JUMPS[active][1],JUMPS[active][2],active===0);
+      else{ppy=clampP(sc.clientWidth/(yrs[1]-yrs[0]));render();sc.scrollLeft=X(yrs[0])}
+    }
     if(sel){const el=track.querySelector(`.it[data-id="${sel.id}"]`);if(el){const r=el.getBoundingClientRect(),b=sc.getBoundingClientRect();if(r.left<b.left||r.left>b.right-60)scrollToItem(sel)}}
     mini();laneVis();stickLabels();
   });
