@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Interactive timeline from creation to AD 100: people of the Bible, kings, prophets, empires and world events side by side.">
+<meta name="description" content="Interactive timeline from creation to AD 400: people of the Bible and the early church, kings, prophets, empires and world events side by side.">
 <style>html{color-scheme:light;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Bible &amp; World Timeline</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -367,9 +367,9 @@ html.big #sheet .s-n{font-size:17px}
 </head>
 <body>
 <header class="wrap">
-  <p class="eyebrow" id="eyebrow">Creation to AD 100</p>
+  <p class="eyebrow" id="eyebrow">Creation to AD 400</p>
   <h1>Bible <span class="amp">&amp;</span> World Timeline</h1>
-  <p class="lede"><span class="l-long">From creation to the apostle John, set against the empires, rulers and thinkers of the ancient world. Select any name to see who was alive at the same time.</span><span class="l-short">The Bible’s people and events beside the empires and rulers of the ancient world. Tap any name for details.</span></p>
+  <p class="lede"><span class="l-long">From creation to the early church, set against the empires, rulers and thinkers of the ancient world. Select any name to see who was alive at the same time.</span><span class="l-short">The Bible’s people and events beside the empires and rulers of the ancient world. Tap any name for details.</span></p>
 </header>
 
 <div id="app" class="wrap nosel">
@@ -448,15 +448,16 @@ html.big #sheet .s-n{font-size:17px}
   <p>Dates follow a traditional chronology that takes the Bible’s own numbers at face value: an Exodus around 1446 BC (1 Kings 6:1) and the widely used reign dates worked out by Edwin Thiele for the kings. Many historians place the Exodus near 1260 BC and the patriarchs later. Reign dates can differ by a year or two because of shared reigns between fathers and sons and different calendars. Where scholars propose clearly different dates, a thin line under the entry shows the range.</p>
   <p>Genesis 1–11 is placed by adding up the ages in Genesis 5 and 11 (the Hebrew text) and counting back from Abraham. That puts creation at about 4174 BC and the Flood at about 2518 BC. Archbishop Ussher’s well-known 4004 BC uses the same method with a later date for Abraham, while the Greek Septuagint’s numbers add roughly 1,400 years. Many Bible scholars read these genealogies as selective rather than complete, and geology and astronomy date the earth and universe far older. This section therefore shows the Bible’s own reckoning, not dates historians agree on. On these numbers the Flood falls within Egypt’s Old Kingdom, whose records show no break.</p>
   <p>Dates for Egypt and Mesopotamia follow the standard chronology. On those dates the 1446 BC Exodus falls under Thutmose III; those who hold the early Exodus usually place Egypt’s kings a few decades earlier, making Amenhotep II the pharaoh of the Exodus. Anything before about 900 BC is approximate, and judges are shown by their time in office.</p>
+  <p>After AD 100, emperors and church history follow standard dates. Many birth dates of early church leaders are estimates, often worked out from the age they were when they died.</p>
 </footer>
 <script>
-const START=-4250, END=100, PADL=28, PADR=48, LBL_PPY=1.5;
+const START=-4250, END=400, PADL=28, PADR=48, LBL_PPY=1.5;
 const LANES=[
-  {id:'people',  name:'People of the Bible', sub:'lifespans; judges by time in office'},
+  {id:'people',  name:'People of the Bible & church', sub:'lifespans; judges by time in office'},
   {id:'judah',   name:'Kings & rulers of Judah', sub:'reigns; includes the united kingdom and the Herods'},
   {id:'israel',  name:'Kings of Israel', sub:'northern kingdom, reigns'},
   {id:'prophets',name:'Prophets', sub:'years of ministry'},
-  {id:'bevents', name:'Bible events', sub:''},
+  {id:'bevents', name:'Bible & church events', sub:''},
   {id:'empires', name:'Empires & nations', sub:''},
   {id:'rulers',  name:'World rulers', sub:'reigns'},
   {id:'world',   name:'Wider world', sub:'events, cultures and thinkers'}
@@ -465,12 +466,12 @@ const ERAS=[
   [-4174,-2518,'Creation to the Flood'],[-2518,-2166,'Flood to Abraham'],[-2166,-1876,'Patriarchs'],[-1876,-1446,'Israel in Egypt'],
   [-1446,-1406,'Wilderness'],[-1406,-1050,'Judges'],[-1050,-931,'United kingdom'],
   [-931,-586,'Divided kingdom'],[-586,-538,'Exile'],[-538,-430,'Return'],
-  [-430,-5,'Between the Testaments'],[-5,30,'Jesus'],[30,100,'Early church']
+  [-430,-5,'Between the Testaments'],[-5,30,'Jesus'],[30,100,'The apostles'],[100,313,'Church under persecution'],[313,400,'Church and empire']
 ];
 const JUMPS=[
-  ['Whole span',-4250,100],['Creation to Abraham',-4250,-1950],['Patriarchs',-2250,-1780],['Egypt & Exodus',-1960,-1350],
+  ['Whole span',-4250,400],['Creation to Abraham',-4250,-1950],['Patriarchs',-2250,-1780],['Egypt & Exodus',-1960,-1350],
   ['Judges',-1460,-1000],['Kings & prophets',-1060,-570],['Exile & return',-640,-400],
-  ['Between the Testaments',-450,0],['Jesus & the apostles',-40,100]
+  ['Between the Testaments',-450,0],['Jesus & the apostles',-40,100],['The early church',80,400]
 ];
 
 const DATA=[];
@@ -522,7 +523,25 @@ function add(lane,name,s,e,note,ref,f,alt){DATA.push({lane,name,s,e,note,ref:ref
  ["Peter",1,64,"Fisherman called by Jesus; leader of the early church in Jerusalem; martyred in Rome by tradition.","Gospels; Acts 1–15; 1–2 Peter","c"],
  ["James, brother of Jesus",1,62,"Leader of the Jerusalem church; killed in AD 62 according to the historian Josephus.","Acts 15; Galatians 1–2; James","c"],
  ["Paul",5,64,"Pharisee turned apostle; planted churches across the Roman world and wrote thirteen letters.","Acts 7–28; Romans – Philemon","mc"],
- ["John the apostle",6,100,"One of the Twelve; by tradition the last apostle to die, at Ephesus.","John; 1–3 John; Revelation","c"]
+ ["John the apostle",6,100,"One of the Twelve; by tradition the last apostle to die, at Ephesus.","John; 1–3 John; Revelation","c"],
+ ["Clement of Rome",35,99,"Leader of the church in Rome. His letter to the Corinthians, about AD 96, is the oldest Christian writing outside the New Testament.","","c"],
+ ["Ignatius of Antioch",35,108,"Bishop of Antioch who wrote seven letters to churches while being taken to Rome to be martyred.","","c"],
+ ["Papias",60,130,"Bishop of Hierapolis who passed on early reports of how Mark’s and Matthew’s Gospels were written.","","c"],
+ ["Polycarp",69,155,"Bishop of Smyrna and a disciple of the apostle John. Burned at the stake aged 86.","","mc"],
+ ["Justin Martyr",100,165,"Philosopher who explained the faith to the emperor and described Sunday worship. Martyred in Rome.","","c"],
+ ["Irenaeus",130,202,"Bishop of Lyon, taught by Polycarp. Defended the faith against the Gnostics and named the four Gospels.","","c"],
+ ["Tertullian",155,220,"Writer from Carthage; the first to write theology in Latin and to use the word “Trinity”.","","c"],
+ ["Perpetua",182,203,"Young mother martyred at Carthage with her servant Felicity; her prison diary survives.","","c"],
+ ["Origen",185,253,"Scholar of Alexandria who compared the Hebrew and Greek texts of the Old Testament side by side.","","c"],
+ ["Cyprian",210,258,"Bishop of Carthage through the persecution under Decius; martyred under Valerian.","","c"],
+ ["Antony of Egypt",251,356,"Gave away his wealth and lived in the desert; the father of Christian monks.","","c"],
+ ["Eusebius",260,339,"Bishop of Caesarea who wrote the first history of the church.","","c"],
+ ["Athanasius",296,373,"Bishop of Alexandria who defended the full divinity of Christ against Arius, often at great cost.","","mc"],
+ ["Basil the Great",330,379,"Bishop in Cappadocia who helped settle the church’s teaching on the Trinity and founded hospitals for the poor.",""],
+ ["Ambrose",339,397,"Bishop of Milan who baptised Augustine and stood up to the emperor Theodosius.","","c"],
+ ["John Chrysostom",347,407,"Archbishop of Constantinople, famous for his preaching; “Chrysostom” means “golden-mouthed”.","","c"],
+ ["Jerome",347,420,"Scholar who translated the Bible into Latin from the Hebrew and Greek; his version, the Vulgate, was used for a thousand years.","","c"],
+ ["Augustine",354,430,"Bishop of Hippo in North Africa. His Confessions and City of God shaped Western Christianity.","","m"]
 ].forEach(a=>add('people',...a));
 
 // Kings & rulers of Judah
@@ -620,7 +639,23 @@ function add(lane,name,s,e,note,ref,f,alt){DATA.push({lane,name,s,e,note,ref:ref
  ["Paul’s missionary journeys",46,57,"Three journeys through Cyprus, Asia Minor and Greece.","Acts 13–21","c"],
  ["Council of Jerusalem",49,49,"Agrees that Gentile believers need not be circumcised.","Acts 15","c"],
  ["Temple destroyed by Rome",70,70,"Titus’s legions burn Jerusalem and the temple, as Jesus foretold.","Luke 21:5–6","m"],
- ["Revelation written",95,95,"John receives his vision on the island of Patmos.","Revelation 1","c"]
+ ["Revelation written",95,95,"John receives his vision on the island of Patmos.","Revelation 1","c"],
+ ["Pliny writes to Trajan about Christians",112,112,"A Roman governor describes Christians meeting before dawn to sing “to Christ as to a god”.","","c"],
+ ["Bar Kokhba revolt",132,135,"The second Jewish revolt against Rome. Afterwards Jews are banned from Jerusalem, which is rebuilt as a Roman city.","","m"],
+ ["Martyrdom of Polycarp",155,155,"Polycarp refuses to curse Christ: “Eighty-six years I have served him, and he has done me no wrong.”","","c"],
+ ["Muratorian list of books",170,170,"The oldest surviving list of New Testament books, close to today’s list.","","c"],
+ ["Persecution under Decius",250,251,"Every citizen must sacrifice to the gods and get a certificate; many Christians are killed.",""],
+ ["Armenia becomes Christian",301,301,"The first kingdom to make Christianity its official religion.","","c"],
+ ["The Great Persecution",303,311,"Diocletian orders churches destroyed, Scriptures burned and clergy arrested.","","m"],
+ ["Edict of Milan",313,313,"Constantine and Licinius give Christians and all others freedom of worship.","","m"],
+ ["Council of Nicaea",325,325,"Bishops from across the empire declare the Son “of one being with the Father” and agree the Nicene Creed.","","m"],
+ ["Church of the Holy Sepulchre",335,335,"Built in Jerusalem over the traditional site of Jesus’ tomb.",""],
+ ["Codex Sinaiticus copied",350,350,"One of the two oldest complete Bibles, in Greek; it survives today.","","c"],
+ ["Athanasius lists the New Testament",367,367,"His Easter letter names exactly the 27 books of today’s New Testament.","","m"],
+ ["Christianity made the state religion",380,380,"Theodosius declares Nicene Christianity the faith of the Roman Empire.","","m"],
+ ["Council of Constantinople",381,381,"Expands the Nicene Creed, especially on the Holy Spirit.",""],
+ ["Jerome begins the Latin Bible",382,382,"Pope Damasus asks Jerome to revise the Latin Bible; he goes back to the Hebrew and Greek.",""],
+ ["Council of Carthage",397,397,"Confirms the 27 books of the New Testament for the western church.",""]
 ].forEach(a=>add('bevents',...a));
 
 // Empires & nations
@@ -634,7 +669,7 @@ function add(lane,name,s,e,note,ref,f,alt){DATA.push({lane,name,s,e,note,ref:ref
  ["New Kingdom Egypt",-1550,-1070,"Egypt’s imperial age and the setting of the Exodus.","","m"],
  ["Phoenicia (Tyre & Sidon)",-1200,-332,"Sea-trading cities. Hiram of Tyre supplied cedar for Solomon’s temple.","1 Kings 5; Ezekiel 26–28"],
  ["Philistines",-1175,-604,"Sea Peoples settled on Canaan’s coast; Israel’s rivals from Samson to David.","Judges 13 – 2 Samuel 5"],
- ["Kingdom of Kush",-1070,100,"Nile kingdom south of Egypt, in today’s Sudan, lasting to about AD 350. Its kings ruled Egypt c. 744–656 BC. Tirhakah and the official baptised by Philip came from Kush.","2 Kings 19:9; Acts 8:27"],
+ ["Kingdom of Kush",-1070,350,"Nile kingdom south of Egypt, in today’s Sudan, until about AD 350. Its kings ruled Egypt c. 744–656 BC. Tirhakah and the official baptised by Philip came from Kush.","2 Kings 19:9; Acts 8:27"],
  ["Aram-Damascus",-1000,-732,"Syrian kingdom often at war with Israel; fell to Assyria in 732 BC.","1 Kings 20; 2 Kings 16"],
  ["Neo-Assyrian Empire",-911,-609,"Destroyed Samaria and invaded Judah. Its capital Nineveh fell in 612 BC.","2 Kings 15–19; Jonah; Nahum","m"],
  ["Neo-Babylonian Empire",-626,-539,"Destroyed Jerusalem and the temple; fell to Cyrus in a single night.","2 Kings 24–25; Daniel 5","m"],
@@ -642,9 +677,11 @@ function add(lane,name,s,e,note,ref,f,alt){DATA.push({lane,name,s,e,note,ref:ref
  ["Roman Republic",-509,-27,"Rome expands across the Mediterranean.",""],
  ["Ptolemaic Egypt",-305,-30,"Greek dynasty founded by one of Alexander’s generals; ruled Judea until 198 BC.","Daniel 11"],
  ["Seleucid Empire",-312,-63,"Greek dynasty based in Syria. Antiochus IV persecuted the Jews.","Daniel 11"],
- ["Parthian Empire",-247,100,"Iranian rival of Rome. Parthians were in Jerusalem at Pentecost.","Acts 2:9"],
+ ["Parthian Empire",-247,224,"Iranian rival of Rome. Parthians were in Jerusalem at Pentecost.","Acts 2:9"],
  ["Hasmonean Judea",-140,-63,"Independent Jewish kingdom after the Maccabean revolt.",""],
- ["Roman Empire",-27,100,"Rule of the Caesars and the world of the New Testament.","Luke 2:1","m"]
+ ["Roman Empire",-27,400,"Rule of the Caesars and the world of the New Testament. Divided into eastern and western halves in 395; it continues beyond this timeline.","Luke 2:1","m"],
+ ["Kingdom of Aksum",100,400,"Trading kingdom in today’s Ethiopia and Eritrea, lasting to about AD 940. It became Christian under King Ezana about 340.","","c"],
+ ["Sasanian Persian Empire",224,400,"Persia’s new dynasty and Rome’s great rival in the east, lasting until 651.",""]
 ].forEach(a=>add('empires',...a));
 
 // World rulers
@@ -681,7 +718,19 @@ function add(lane,name,s,e,note,ref,f,alt){DATA.push({lane,name,s,e,note,ref:ref
  ["Nero",54,68,"The Caesar Paul appealed to; persecuted Christians after Rome’s great fire.","Acts 25:11"],
  ["Vespasian",69,79,"Led the war in Judea, then became emperor.",""],
  ["Titus",79,81,"As a general, destroyed Jerusalem in AD 70.",""],
- ["Domitian",81,96,"Emperor when, by tradition, John was exiled to Patmos.",""]
+ ["Domitian",81,96,"Emperor when, by tradition, John was exiled to Patmos.",""],
+ ["Trajan",98,117,"His reply to Pliny set the policy: Christians were not to be hunted down, but were punished if accused and they would not recant.","","m"],
+ ["Hadrian",117,138,"Crushed the Bar Kokhba revolt and rebuilt Jerusalem as a Roman city, Aelia Capitolina.",""],
+ ["Marcus Aurelius",161,180,"Philosopher-emperor; Justin Martyr and the martyrs of Lyon died in his reign.",""],
+ ["Septimius Severus",193,211,"Emperor during the persecution in which Perpetua died.",""],
+ ["Ardashir I",224,242,"Overthrew the Parthians and founded the Sasanian Persian Empire.",""],
+ ["Decius",249,251,"Ordered the first empire-wide persecution of Christians.",""],
+ ["Shapur I",240,270,"Sasanian king who captured the Roman emperor Valerian in battle.",""],
+ ["Diocletian",284,305,"Reorganised the empire and began the Great Persecution in 303.","","m"],
+ ["Constantine the Great",306,337,"The first Christian emperor. Ended the persecution, called the Council of Nicaea and founded Constantinople.","","m"],
+ ["Ezana of Aksum",320,360,"King of Aksum, in Ethiopia, who became a Christian and put the cross on his coins.","","c"],
+ ["Julian the Apostate",361,363,"Constantine’s nephew, who tried to bring back the old gods.",""],
+ ["Theodosius I",379,395,"Made Nicene Christianity the official religion of the empire; the last emperor to rule both east and west.","","m"]
 ].forEach(a=>add('rulers',...a));
 
 // Wider world
@@ -698,7 +747,7 @@ function add(lane,name,s,e,note,ref,f,alt){DATA.push({lane,name,s,e,note,ref:ref
  ["Trojan War (traditional)",-1184,-1184,"The war told in Homer’s Iliad.","","c"],
  ["Bronze Age collapse",-1177,-1177,"Many Mediterranean kingdoms fall; Sea Peoples, including the Philistines, settle Canaan’s coast.","","c"],
  ["Zhou dynasty, China",-1046,-256,"The longest-lasting Chinese dynasty.","","c"],
- ["Nok culture (West Africa)",-900,100,"Iron-working people of central Nigeria known for terracotta sculpture; lasted to about AD 200.","","c"],
+ ["Nok culture (West Africa)",-900,200,"Iron-working people of central Nigeria known for terracotta sculpture.","","c"],
  ["First Olympic Games",-776,-776,"The traditional start of Greek recorded history.","","c"],
  ["Homer’s epics",-750,-750,"The Iliad and the Odyssey take written form.","","c"],
  ["Rome founded (legend)",-753,-753,"The traditional date for Romulus founding Rome.","","c"],
@@ -713,10 +762,18 @@ function add(lane,name,s,e,note,ref,f,alt){DATA.push({lane,name,s,e,note,ref:ref
  ["Aristotle",-384,-322,"Philosopher and tutor to Alexander the Great.",""],
  ["Library of Alexandria",-285,-285,"The greatest library of the ancient world.","","c"],
  ["Great Wall joined",-214,-214,"China’s first emperor links earlier walls into one line.","","c"],
- ["Han dynasty, China",-206,100,"Opens the Silk Road trade toward Rome.",""],
+ ["Han dynasty, China",-206,220,"Opens the Silk Road trade toward Rome.",""],
  ["Carthage destroyed",-146,-146,"Rome becomes master of the Mediterranean.",""],
  ["Vesuvius buries Pompeii",79,79,"The eruption destroys Pompeii and Herculaneum.",""],
- ["Colosseum opens",80,80,"Amphitheatre built by Vespasian and Titus in Rome.",""]
+ ["Colosseum opens",80,80,"Amphitheatre built by Vespasian and Titus in Rome.",""],
+ ["Paper improved in China",105,105,"Cai Lun reports a cheap way of making paper from bark, rags and hemp.","","c"],
+ ["Hadrian’s Wall",122,128,"A wall built across northern Britain to mark the edge of the empire.",""],
+ ["Ptolemy’s Almagest",150,150,"Greek astronomer in Alexandria whose model of the heavens is used for 1,400 years.","","c"],
+ ["Maya cities flourish",250,400,"Classic-age Maya cities with temples and writing rise in Central America.","","c"],
+ ["Gupta Empire, India",320,400,"India’s golden age of science, mathematics and art, lasting to about 550.","","c"],
+ ["Constantinople founded",330,330,"Constantine’s new capital on the site of Byzantium, today’s Istanbul.","","m"],
+ ["Huns reach Europe",370,370,"Their arrival pushes the Goths into the Roman Empire.","","c"],
+ ["Battle of Adrianople",378,378,"The Goths defeat and kill the emperor Valens.",""]
 ].forEach(a=>add('world',...a));
 
 const slug=n=>n.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -739,7 +796,10 @@ const STORIES=[
  ['xerxes-i-ahasuerus','480–479 BC','Esther’s king fought the Greeks','Xerxes loses to the Greeks at Salamis in 480 BC. In his seventh year, about 479 BC, Esther becomes his queen.'],
  ['nehemiah','445 BC','Nehemiah and Athens','Jerusalem’s walls go up in the same years Athens builds the Parthenon and Socrates is a young man.'],
  ['jesus-of-nazareth','5 BC – AD 30','Jesus under Augustus and Tiberius','Luke dates Jesus’ birth by Augustus’s census and the start of John the Baptist’s ministry to the fifteenth year of Tiberius.'],
- ['paul','AD 59–64','Paul appeals to Caesar','The Caesar Paul appeals to is Nero, who later blames Christians for the great fire of Rome.']
+ ['paul','AD 59–64','Paul appeals to Caesar','The Caesar Paul appeals to is Nero, who later blames Christians for the great fire of Rome.'],
+ ['pliny-writes-to-trajan-about-christians','AD 112','A Roman governor describes Christians','Pliny asks the emperor Trajan what to do with Christians, who meet before dawn to sing to Christ “as to a god”. It is one of the earliest Roman descriptions of Christian worship.'],
+ ['council-of-nicaea','AD 313–325','From persecution to the emperor’s palace','Within twelve years of the Great Persecution, Constantine grants freedom of worship and hosts the bishops at Nicaea, some still scarred from torture.'],
+ ['athanasius-lists-the-new-testament','AD 367–397','The New Testament takes shape','The church did not invent the canon but recognised the books already read in worship. Athanasius lists the 27 books in 367, and the Council of Carthage confirms them in 397.']
 ];
 
 // ---------- helpers ----------
@@ -1307,7 +1367,7 @@ addEventListener('afterprint',()=>{
 });
 
 // ---------- start ----------
-$('#eyebrow').textContent=`${DATA.length} people, rulers and events · creation to AD 100`;
+$('#eyebrow').textContent=`${DATA.length} people, rulers and events · creation to AD 400`;
 initMini(); renderToggles();
 (function(){let s='normal';try{s=localStorage.getItem('bwt-size')||'normal'}catch(e){} applySize(s==='big'?'big':'normal')})();
 const linked=byId.get(decodeURIComponent(location.hash.slice(1)));
